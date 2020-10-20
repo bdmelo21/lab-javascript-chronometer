@@ -6,10 +6,10 @@ class Chronometer {
     // ... your code goes here
   }
   startClick(callback) {
-    
+
     setInterval(()=>{
-      return this.currentTime+=1;
-    }, 1000);
+      this.currentTime++;
+      if (callback)callback()}, 1000);
     
     // ... your code goes here
   }
@@ -25,9 +25,11 @@ class Chronometer {
     }
     // ... your code goes here
   }
-  twoDigitsNumber() {
-    let string="  ";
-    return string; //lol
+  twoDigitsNumber(value) {
+    if (value<10) {
+      return `0${value}`;
+    }
+    return `${value}`;
   }
     // ... your code goes here
   stopClick() {

@@ -1,3 +1,4 @@
+
 const chronometer = new Chronometer();
 
 // get the buttons:
@@ -14,15 +15,20 @@ let milUni = document.getElementById('milUni');
 let splits = document.getElementById('splits');
 
 function printTime() {
-  // ... your code goes here
+  printMinutes();
+  printSeconds();
 }
 
 function printMinutes() {
-  // ... your code goes here
+    let twoDigitsMinutes = chronometer.twoDigitsNumber(chronometer.getMinutes());
+    minUni.innerHTML=twoDigitsMinutes[1];
+    minDec.innerHTML=twoDigitsMinutes[0];
 }
 
 function printSeconds() {
-  // ... your code goes here
+    let twoDigitsSeconds = chronometer.twoDigitsNumber(chronometer.getSeconds());
+    secUni.innerHTML=twoDigitsSeconds[1];
+    secDec.innerHTML=twoDigitsSeconds[0];
 }
 
 // ==> BONUS
@@ -39,27 +45,48 @@ function clearSplits() {
 }
 
 function setStopBtn() {
-  // ... your code goes here
+  btnLeft.classList.remove ("start")
+  btnLeft.classList.add ("stop");
+  btnLeft.innerHTML='STOP';
+  return chronometer.stopClick();
 }
 
 function setSplitBtn() {
-  // ... your code goes here
+  btnRight.classList.remove ("reset")
+  btnRight.classList.add ("split");
+  btnRight.innerHTML= 'SPLIT';
 }
 
 function setStartBtn() {
-  // ... your code goes here
+  btnLeft.classList.remove ("stop")
+  btnLeft.classList.add ("start");
+  btnLeft.innerHTML= 'START';
+  return chronometer.startClick();
 }
 
 function setResetBtn() {
-  // ... your code goes here
+  btnRight.classList.remove("split")
+  btnRight.classList.add("reset");
+  btnRight.innerHTML='RESET';
 }
 
 // Start/Stop Button
 btnLeft.addEventListener('click', () => {
-  // ... your code goes here
+  if (btnLeft.classList.contains("start")) {
+    setStopBtn();
+    chronometer.startClick(printTime);
+  }
+  else if (btnLeft.classList.contains("stop")) {
+    setStartBtn();
+  } // ... your code goes here
 });
 
 // Reset/Split Button
 btnRight.addEventListener('click', () => {
-  // ... your code goes here
+  if (btnRight.classList.contains("reset") ) {
+    return setSplitBtn();
+  }
+  else if (btnRight.classList.contains("split")) {
+    return setResetBtn();
+  }
 });
